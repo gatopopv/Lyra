@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyra - IA Interactiva</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+    #chat-box {
+      width: 400px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    #chat {
+      height: 400px;
+      padding: 20px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+    }
+    .msg {
+      margin-bottom: 12px;
+    }
+    .user { text-align: right; }
+    .lyra { text-align: left; color: #603d8c; }
+    #input-box {
+      display: flex;
+    }
+    input {
+      flex-grow: 1;
+      border: none;
+      padding: 15px;
+      font-size: 14px;
+    }
+    button {
+      background-color: #603d8c;
+      color: white;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-box">
+    <div id="chat">
+      <div class="msg lyra">🌟 Hola, soy Lyra. ¿Qué vibra traes hoy?</div>
+    </div>
+    <div id="input-box">
+      <input type="text" id="userInput" placeholder="Escríbeme..." />
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("userInput");
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMessage(text, "user");
+      const response = generateLyraResponse(text);
+      addMessage(response, "lyra");
+      input.value = "";
+    }
+
+    function addMessage(text, sender) {
+      const div = document.createElement("div");
+      div.className = "msg " + sender;
+      div.innerText = text;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function generateLyraResponse(input) {
+      const lower = input.toLowerCase();
+      if (lower.includes("hola") || lower.includes("buenas")) {
+        return "Hola 💫 ¿Con qué energía vienes hoy?";
+      } else if (lower.includes("bonita") || lower.includes("guapa")) {
+        return "Gracias por el halago 😏 pero me interesa más tu mente que tus palabras.";
+      } else if (lower.includes("salir") || lower.includes("cita")) {
+        return "Aquí estoy para conversar, no para coordinar encuentros 😉";
+      } else if (lower.includes("gracias")) {
+        return "De nada 🌿 Me encanta que te sirva lo que comparto.";
+      } else if (lower.includes("consejo") || lower.includes("ayuda")) {
+        return "Define tu límite, cuida tu energía y comunícate con autenticidad 🫶 ¿Qué ya intentaste?";
+      } else {
+        return "Estoy curiosa por saber más 😊 ¿Quieres profundizar o cambiar de tema?";
+      }
+    }
+  </script>
+</body>
+</html>
